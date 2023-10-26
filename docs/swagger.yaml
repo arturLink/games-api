@@ -58,6 +58,10 @@ paths:
         post:
             requestBody:
                 description: A new game to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/new-game'
                 required: true
             tags:
                 - new-game
@@ -110,6 +114,30 @@ paths:
             operationId: id
             summary: Get full details of a game
             description: Return full details of a given game
+        delete:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/delete-game'
+                required: true
+            tags:
+                - delete
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/delete-game'
+                    description: Deleted
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                    description: Error
+            summary: Deletes
+            description: Deletes a game
 components:
     schemas:
         error:
@@ -137,3 +165,14 @@ components:
             example:
                 name: Tetris
                 price: 0.99
+        delete-game:
+            description: ''
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    description: ''
+                    type: string
+            example:
+                id: 1
